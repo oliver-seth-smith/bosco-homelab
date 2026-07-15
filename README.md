@@ -6,7 +6,7 @@ B.O.S.C.O. stands for **Bunch Of Stuff Courtesy of, Oliver**. This repository do
 
 This lab is designed to be shown to potential employers as a working operations platform, not just a list of self-hosted apps.
 
-The strongest signals this repo should show:
+The strongest signals this repo shows:
 
 - Reproducible infrastructure with Terraform and Ansible.
 - Containerized applications behind a reverse proxy with TLS.
