@@ -1,5 +1,7 @@
 # Runbooks
 
+Focused incident runbooks live in [docs/incidents](/home/oliver/bosco-homelab/docs/incidents).
+
 ## Service Down
 
 1. Check Uptime Kuma to confirm which endpoint is failing.
@@ -72,4 +74,3 @@ Issues found:
 2. Check Traefik or Caddy certificate logs.
 3. Verify ACME challenge method and firewall rules.
 4. Renew or restart the edge proxy only after config validation.
-

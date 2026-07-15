@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  validate:
+  validate-compose:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -16,14 +16,62 @@ jobs:
       - name: Validate Docker Compose files
         run: ./scripts/check-compose.sh
 
-      - name: Run secret scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  validate-ansible:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - name: Run Terraform fmt
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Ansible tooling
+        run: pip install ansible ansible-lint yamllint
+
+      - name: Lint YAML
+        run: yamllint .
+
+      - name: Lint Ansible
+        working-directory: ansible
+        run: ansible-lint playbooks/bootstrap.yml
+
+  validate-terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Check Terraform formatting
         run: terraform fmt -check -recursive terraform
 
+      - name: Initialize Terraform without backend
+        working-directory: terraform/proxmox
+        run: terraform init -backend=false
+
+      - name: Validate Terraform
+        working-directory: terraform/proxmox
+        run: terraform validate
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Trivy config scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: config
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: "0"

@@ -1,0 +1,29 @@
+- name: Install baseline packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - git
+      - gnupg
+      - htop
+      - jq
+      - lsb-release
+      - unattended-upgrades
+      - vim
+    state: present
+    update_cache: true
+
+- name: Enable unattended security upgrades
+  ansible.builtin.service:
+    name: unattended-upgrades
+    enabled: true
+    state: started
+
+- name: Ensure application data root exists
+  ansible.builtin.file:
+    path: "{{ bosco_data_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+

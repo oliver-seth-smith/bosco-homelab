@@ -3,6 +3,5 @@ set -euo pipefail
 
 for file in compose/*/docker-compose.yml; do
   echo "Validating ${file}"
-  docker compose -f "${file}" config >/dev/null
+  docker compose --env-file compose/.env.example -f "${file}" config >/dev/null
 done
-

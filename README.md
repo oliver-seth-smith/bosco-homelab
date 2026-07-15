@@ -122,14 +122,14 @@ Add these once the core lab is stable.
 
 ## Suggested Milestones
 
-1. **Document the physical server**: CPU, RAM, disks, NICs, switch, VLANs, and network diagram.
-2. **Provision the base OS** with Ansible.
-3. **Deploy monitoring** and create screenshots of dashboards.
-4. **Deploy SSO** and put internal apps behind it.
-5. **Automate backups** and document a successful restore.
-6. **Add CI checks** for Compose, Ansible, Terraform, and secret scanning.
-7. **Write incident runbooks** for service outage, disk-full, expired cert, and failed backup.
-8. **Move selected workloads to k3s** using GitOps.
+1. **Document the physical server**: [docs/server-inventory.md](/home/oliver/bosco-homelab/docs/server-inventory.md)
+2. **Provision the base OS** with Ansible: [docs/base-os.md](/home/oliver/bosco-homelab/docs/base-os.md)
+3. **Deploy monitoring** and create screenshots: [docs/monitoring.md](/home/oliver/bosco-homelab/docs/monitoring.md)
+4. **Deploy SSO** and put internal apps behind it: [docs/sso.md](/home/oliver/bosco-homelab/docs/sso.md)
+5. **Automate backups** and document restore tests: [docs/backup-restore.md](/home/oliver/bosco-homelab/docs/backup-restore.md)
+6. **Add CI checks** for Compose, Ansible, Terraform, and secret scanning: [.github/workflows/ci.yml](/home/oliver/bosco-homelab/.github/workflows/ci.yml)
+7. **Write incident runbooks**: [docs/incidents](/home/oliver/bosco-homelab/docs/incidents)
+8. **Move selected workloads to k3s** using GitOps: [docs/gitops-k3s.md](/home/oliver/bosco-homelab/docs/gitops-k3s.md)
 
 ## What To Show Employers
 
@@ -139,4 +139,3 @@ Add these once the core lab is stable.
 - A runbook with a tested recovery command.
 - A restore test log proving backups work.
 - An explanation of why each service exists and how it is secured.
-

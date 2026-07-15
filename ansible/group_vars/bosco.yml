@@ -1,0 +1,5 @@
+bosco_data_root: /srv/bosco
+bosco_admin_user: oliver
+bosco_ssh_password_authentication: "no"
+bosco_ssh_permit_root_login: "no"
+
