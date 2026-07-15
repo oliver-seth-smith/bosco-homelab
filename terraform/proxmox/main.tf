@@ -10,10 +10,9 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint = var.proxmox_endpoint
+  endpoint  = var.proxmox_endpoint
   api_token = var.proxmox_api_token
-  insecure = var.proxmox_insecure
+  insecure  = var.proxmox_insecure
 }
 
 # Add VM/LXC resources here after creating a Proxmox API token.
-

@@ -43,7 +43,9 @@
 
 - name: Install Docker Compose CLI plugin
   ansible.builtin.get_url:
-    url: "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-{{ bosco_docker_compose_arch_map[ansible_architecture] }}"
+    url: >-
+      {{ bosco_docker_compose_base_url }}/docker-compose-linux-{{
+      bosco_docker_compose_arch_map[ansible_architecture] }}
     dest: /usr/local/lib/docker/cli-plugins/docker-compose
     owner: root
     group: root

@@ -6,3 +6,4 @@ bosco_docker_compose_arch_map:
   x86_64: x86_64
   aarch64: aarch64
   armv7l: armv7
+bosco_docker_compose_base_url: https://github.com/docker/compose/releases/latest/download
