@@ -27,3 +27,10 @@
     group: root
     mode: "0755"
 
+- name: Ensure repository deploy directory exists
+  ansible.builtin.file:
+    path: "{{ bosco_data_root }}/repo"
+    state: directory
+    owner: "{{ bosco_admin_user }}"
+    group: "{{ bosco_admin_user }}"
+    mode: "0755"
