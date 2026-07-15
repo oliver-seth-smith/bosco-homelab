@@ -128,6 +128,8 @@ Add these once the core lab is stable.
 
 For day-to-day usage, see [docs/tool-guide.md](/home/oliver/bosco-homelab/docs/tool-guide.md). For the actual first deployment notes, see [docs/deployment-log.md](/home/oliver/bosco-homelab/docs/deployment-log.md).
 
+Daily operations logging is designed to run on `bosco` itself. See [docs/server-logging.md](/home/oliver/bosco-homelab/docs/server-logging.md).
+
 ## Suggested Milestones
 
 1. **Document the physical server**: [docs/server-inventory.md](/home/oliver/bosco-homelab/docs/server-inventory.md)
