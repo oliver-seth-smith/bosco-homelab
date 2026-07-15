@@ -2,4 +2,7 @@ bosco_data_root: /srv/bosco
 bosco_admin_user: oliver
 bosco_ssh_password_authentication: "no"
 bosco_ssh_permit_root_login: "no"
-
+bosco_docker_compose_arch_map:
+  x86_64: x86_64
+  aarch64: aarch64
+  armv7l: armv7
