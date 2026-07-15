@@ -4,7 +4,7 @@
 .terraform/
 .terraform.lock.hcl
 *.log
+*.swp
 *.retry
 secrets/
 data/
-
