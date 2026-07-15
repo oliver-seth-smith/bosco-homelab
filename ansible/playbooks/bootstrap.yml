@@ -1,0 +1,30 @@
+- name: Bootstrap B.O.S.C.O. hosts
+  hosts: bosco
+  become: true
+  tasks:
+    - name: Install baseline packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - git
+          - htop
+          - jq
+          - unattended-upgrades
+        state: present
+        update_cache: true
+
+    - name: Enable unattended security upgrades
+      ansible.builtin.service:
+        name: unattended-upgrades
+        enabled: true
+        state: started
+
+    - name: Ensure application data root exists
+      ansible.builtin.file:
+        path: /srv/bosco
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+

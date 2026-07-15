@@ -1,0 +1,62 @@
+services:
+  authentik-postgresql:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_DB: authentik
+      POSTGRES_USER: authentik
+      POSTGRES_PASSWORD: change-this-postgres-password
+    volumes:
+      - authentik-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  authentik-redis:
+    image: docker.io/library/redis:7-alpine
+    restart: unless-stopped
+
+  authentik-server:
+    image: ghcr.io/goauthentik/server:2024.12.2
+    command: server
+    environment:
+      AUTHENTIK_REDIS__HOST: authentik-redis
+      AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: change-this-postgres-password
+      AUTHENTIK_SECRET_KEY: change-this-secret-key
+    volumes:
+      - authentik-media:/media
+      - authentik-templates:/templates
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    depends_on:
+      - authentik-postgresql
+      - authentik-redis
+    restart: unless-stopped
+
+  authentik-worker:
+    image: ghcr.io/goauthentik/server:2024.12.2
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: authentik-redis
+      AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: change-this-postgres-password
+      AUTHENTIK_SECRET_KEY: change-this-secret-key
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - authentik-media:/media
+      - authentik-certs:/certs
+      - authentik-templates:/templates
+    depends_on:
+      - authentik-postgresql
+      - authentik-redis
+    restart: unless-stopped
+
+volumes:
+  authentik-db:
+  authentik-media:
+  authentik-certs:
+  authentik-templates:
+

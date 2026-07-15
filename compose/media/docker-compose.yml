@@ -1,0 +1,16 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.10.3
+    user: "1000:1000"
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - ${DATA_ROOT}/media:/media:ro
+    ports:
+      - "8096:8096"
+    restart: unless-stopped
+
+volumes:
+  jellyfin-config:
+  jellyfin-cache:
+

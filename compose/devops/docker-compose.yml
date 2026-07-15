@@ -1,0 +1,31 @@
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:9
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+      FORGEJO__server__DOMAIN: ${FORGEJO_HOST}
+      FORGEJO__server__ROOT_URL: https://${FORGEJO_HOST}/
+      FORGEJO__service__DISABLE_REGISTRATION: "true"
+    volumes:
+      - forgejo-data:/data
+    ports:
+      - "3001:3000"
+      - "2222:22"
+    restart: unless-stopped
+
+  renovate:
+    image: renovate/renovate:39
+    environment:
+      RENOVATE_PLATFORM: github
+      RENOVATE_ONBOARDING: "true"
+      RENOVATE_REQUIRE_CONFIG: "optional"
+      LOG_LEVEL: info
+    volumes:
+      - renovate-cache:/tmp/renovate
+    restart: "no"
+
+volumes:
+  forgejo-data:
+  renovate-cache:
+
