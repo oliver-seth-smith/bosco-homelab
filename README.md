@@ -1,6 +1,6 @@
 # B.O.S.C.O. Homelab
 
-B.O.S.C.O. stands for **Baseline Operations, Services, Compute, and Observability**. This repository documents and automates a personal homelab built to demonstrate practical DevOps skills: infrastructure as code, Linux administration, container orchestration, GitOps, monitoring, secrets management, backups, and incident response.
+B.O.S.C.O. stands for **Bunch Of Stuff Courtesy of, Oliver**. This repository documents and automates a personal homelab built to demonstrate practical DevOps skills: infrastructure as code, Linux administration, container orchestration, GitOps, monitoring, secrets management, backups, and incident response.
 
 ## Portfolio Goal
 
