@@ -100,17 +100,23 @@ Add these once the core lab is stable.
 
 ## Quick Start
 
-1. Copy environment examples:
+1. Provision the base OS with Ansible:
 
    ```bash
-   cp compose/.env.example compose/.env
+   ansible-playbook -i ansible/inventory/hosts.yml ansible/playbooks/bootstrap.yml --ask-pass --ask-become-pass
    ```
 
-2. Edit `compose/.env` for your domain, timezone, and paths.
-
-3. Start the starter monitoring stack:
+2. Copy the repo to the server:
 
    ```bash
+   rsync -av --exclude .git ./ oliver@192.168.68.69:/srv/bosco/repo/
+   ```
+
+3. Start the starter monitoring stack on the server:
+
+   ```bash
+   cd /srv/bosco/repo
+   cp compose/.env.example compose/.env
    docker compose --env-file compose/.env -f compose/monitoring/docker-compose.yml up -d
    ```
 
@@ -119,6 +125,8 @@ Add these once the core lab is stable.
    ```bash
    docker compose --env-file compose/.env -f compose/edge/docker-compose.yml up -d
    ```
+
+For day-to-day usage, see [docs/tool-guide.md](/home/oliver/bosco-homelab/docs/tool-guide.md). For the actual first deployment notes, see [docs/deployment-log.md](/home/oliver/bosco-homelab/docs/deployment-log.md).
 
 ## Suggested Milestones
 

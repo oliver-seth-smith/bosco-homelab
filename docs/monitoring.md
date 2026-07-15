@@ -12,10 +12,23 @@
 
 ## Deploy
 
+On the server:
+
 ```bash
+cd /srv/bosco/repo
 cp compose/.env.example compose/.env
 docker compose --env-file compose/.env -f compose/monitoring/docker-compose.yml up -d
 ```
+
+URLs:
+
+| Tool | URL |
+| --- | --- |
+| Grafana | `http://192.168.68.69:3000` |
+| Prometheus | `http://192.168.68.69:9090` |
+| Alertmanager | `http://192.168.68.69:9093` |
+| Uptime Kuma | `http://192.168.68.69:3002` |
+| Loki readiness | `http://192.168.68.69:3100/ready` |
 
 ## Initial Checks
 
@@ -25,6 +38,8 @@ curl -fsS http://localhost:9090/-/ready
 curl -fsS http://localhost:3000/api/health
 curl -fsS http://localhost:3100/ready
 ```
+
+See [docs/tool-guide.md](/home/oliver/bosco-homelab/docs/tool-guide.md) for how to use each tool after it is running.
 
 ## Dashboard Screenshots
 
@@ -52,4 +67,3 @@ Create alerts for:
 - Endpoint unavailable for more than 5 minutes.
 - Backup job missing or failed.
 - TLS certificate expiring within 14 days.
-
